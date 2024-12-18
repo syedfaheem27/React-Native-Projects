@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { StyleSheet, View, FlatList, Button } from "react-native";
+import { StatusBar } from "expo-status-bar";
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
 
@@ -30,31 +31,34 @@ export default function App() {
   }
 
   return (
-    <View style={styles.appContainer}>
-      <View style={styles.button}>
-        <Button title="Add New Goal" onPress={openModal} />
+    <>
+      <StatusBar style="dark" />
+      <View style={styles.appContainer}>
+        <View style={styles.button}>
+          <Button title="Add New Goal" onPress={openModal} />
+        </View>
+        {isModalVisible && (
+          <GoalInput
+            visible={isModalVisible}
+            onAddGoal={addGoalHandler}
+            onCloseModal={closeModal}
+          />
+        )}
+        <View style={styles.goalsContainer}>
+          <FlatList
+            data={courseGoals}
+            renderItem={(itemData) => (
+              <GoalItem
+                id={itemData.item.id}
+                text={itemData.item.text}
+                onDeleteGoal={deleteGoalHandler}
+              />
+            )}
+            keyExtractor={(item, index) => item.id}
+          />
+        </View>
       </View>
-      {isModalVisible && (
-        <GoalInput
-          visible={isModalVisible}
-          onAddGoal={addGoalHandler}
-          onCloseModal={closeModal}
-        />
-      )}
-      <View style={styles.goalsContainer}>
-        <FlatList
-          data={courseGoals}
-          renderItem={(itemData) => (
-            <GoalItem
-              id={itemData.item.id}
-              text={itemData.item.text}
-              onDeleteGoal={deleteGoalHandler}
-            />
-          )}
-          keyExtractor={(item, index) => item.id}
-        />
-      </View>
-    </View>
+    </>
   );
 }
 
@@ -66,7 +70,6 @@ const styles = StyleSheet.create({
   },
   goalsContainer: {
     flex: 5,
-    backgroundColor: "#dbeafe",
     opacity: 0.6,
     padding: 4,
   },
