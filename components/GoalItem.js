@@ -8,7 +8,7 @@ const GoalItem = ({ text, id, onDeleteGoal }) => {
         // for android ripple effect
         android_ripple={{ color: "#3b82f6" }}
         // for ios ripple effect
-        syle={({ pressed }) => pressed && styles.pressedText}
+        syle={({ pressed }) => pressed && styles.pressedItem}
       >
         <Text style={styles.goalText}>{text}</Text>
       </Pressable>
@@ -19,10 +19,10 @@ const GoalItem = ({ text, id, onDeleteGoal }) => {
 const styles = StyleSheet.create({
   goalItem: {
     marginBottom: 4,
-    backgroundColor: "#dbeafe",
+    backgroundColor: "#60a5fa",
     borderRadius: 6,
   },
-  pressedText: {
+  pressedItem: {
     opacity: 0.5,
   },
   goalText: {
