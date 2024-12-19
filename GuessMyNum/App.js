@@ -8,12 +8,24 @@ import Colors from "./constants/Colors";
 
 export default function App() {
   const [selectedNum, setSelectedNum] = useState(null);
+  const [isGameOver, setIsGameOver] = useState(false);
 
   const selectNumberHandler = (num) => setSelectedNum(num);
 
+  const gameOverHandler = () => setIsGameOver(true);
+
   let screen = <StartGame onSelectNumber={selectNumberHandler} />;
 
-  if (selectedNum) screen = <Game userNumber={selectedNum} />;
+  if (selectedNum)
+    screen = <Game userNumber={selectedNum} onGameOver={gameOverHandler} />;
+
+  if (isGameOver)
+    return (
+      <View>
+        <Text>Game over</Text>
+      </View>
+    );
+
   return (
     <>
       <StatusBar style="dark" />
