@@ -1,7 +1,6 @@
 import { View, Text, Pressable, StyleSheet } from "react-native";
 
-const PrimaryButton = ({ children }) => {
-  const handlePress = () => console.log("pressed");
+const PrimaryButton = ({ children, onPress }) => {
   return (
     <View style={styles.buttonOuterContainer}>
       <Pressable
@@ -11,7 +10,9 @@ const PrimaryButton = ({ children }) => {
             ? [styles.buttonInnerContainer, styles.pressed]
             : styles.buttonInnerContainer
         }
-        onPress={handlePress}
+        onPress={
+          onPress ? onPress : () => console.log("yet not assigned a function")
+        }
       >
         <Text style={styles.buttonText}>{children}</Text>
       </Pressable>
