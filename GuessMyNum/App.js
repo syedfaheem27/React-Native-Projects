@@ -13,7 +13,7 @@ export default function App() {
 
   let screen = <StartGame onSelectNumber={selectNumberHandler} />;
 
-  if (selectedNum) screen = <Game />;
+  if (selectedNum) screen = <Game userNumber={selectedNum} />;
   return (
     <>
       <StatusBar style="dark" />
