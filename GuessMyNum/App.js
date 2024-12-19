@@ -4,6 +4,7 @@ import StartGame from "./screens/StartGame";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import Game from "./screens/Game";
+import Colors from "./constants/Colors";
 
 export default function App() {
   const [selectedNum, setSelectedNum] = useState(null);
@@ -16,7 +17,10 @@ export default function App() {
   return (
     <>
       <StatusBar style="dark" />
-      <LinearGradient colors={["#451a03", "#fde68a"]} style={{ flex: 1 }}>
+      <LinearGradient
+        colors={[Colors.primary950, Colors.primary200]}
+        style={{ flex: 1 }}
+      >
         <View style={styles.rootScreen}>
           <ImageBackground
             style={styles.rootScreen}
