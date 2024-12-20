@@ -5,6 +5,7 @@ import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import Game from "./screens/Game";
 import Colors from "./constants/Colors";
+import EndGame from "./screens/EndGame";
 
 export default function App() {
   const [selectedNum, setSelectedNum] = useState(null);
@@ -19,12 +20,7 @@ export default function App() {
   if (selectedNum)
     screen = <Game userNumber={selectedNum} onGameOver={gameOverHandler} />;
 
-  if (isGameOver)
-    return (
-      <View>
-        <Text>Game over</Text>
-      </View>
-    );
+  if (isGameOver) return <EndGame />;
 
   return (
     <>

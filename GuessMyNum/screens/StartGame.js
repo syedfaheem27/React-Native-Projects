@@ -1,7 +1,9 @@
-import { TextInput, View, StyleSheet, Alert } from "react-native";
+import { TextInput, View, StyleSheet, Alert, Text } from "react-native";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import { useState } from "react";
 import Colors from "../constants/Colors";
+import InstructionText from "../components/ui/InstructionText";
+import Card from "../components/ui/Card";
 
 const StartGame = ({ onSelectNumber }) => {
   const [enteredText, setEnteredText] = useState("");
@@ -24,7 +26,8 @@ const StartGame = ({ onSelectNumber }) => {
   const resetTextHandler = () => setEnteredText("");
 
   return (
-    <View style={styles.inputContainer}>
+    <Card>
+      <InstructionText>Enter a random number</InstructionText>
       <TextInput
         style={styles.textInput}
         maxLength={2}
@@ -43,31 +46,13 @@ const StartGame = ({ onSelectNumber }) => {
           <PrimaryButton onPress={confirmTextHandler}>Confirm</PrimaryButton>
         </View>
       </View>
-    </View>
+    </Card>
   );
 };
 
 export default StartGame;
 
 const styles = StyleSheet.create({
-  inputContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: Colors.primary600,
-    marginTop: 100,
-    marginHorizontal: 24,
-    paddingTop: 6,
-    paddingHorizontal: 12,
-    borderRadius: 4,
-    elevation: 12,
-    shadowColor: Colors.primary950, //works on android 28 and above
-    // shadowOffset: {
-    //   height: 4,
-    //   width: 4,
-    // },
-    // shadowRadius: 4,
-    // shadowOpacity: 0.5,
-  },
   textInput: {
     borderBottomColor: Colors.primary200,
     borderBottomWidth: 2,
