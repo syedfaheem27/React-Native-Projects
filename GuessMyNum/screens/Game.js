@@ -18,7 +18,7 @@ const generateRandomNumber = (min, max, exclude) => {
 let minBoundary = 1;
 let maxBoundary = 100;
 
-const Game = ({ userNumber, onGameOver }) => {
+const Game = ({ userNumber, onGameOver, incrementRounds }) => {
   const initialGuess = useMemo(
     () => generateRandomNumber(minBoundary, maxBoundary, userNumber),
     []
@@ -34,16 +34,22 @@ const Game = ({ userNumber, onGameOver }) => {
         { text: "Sorry!", style: "cancel" },
       ]);
       return;
-    } else if (action === "lower") maxBoundary = currGuess;
-    else if (action === "higher") minBoundary = currGuess;
+    } else if (action === "lower") maxBoundary = currGuess - 1;
+    else if (action === "higher") minBoundary = currGuess + 1;
 
     const num = generateRandomNumber(minBoundary, maxBoundary, currGuess);
     setCurrGuess(num);
+    incrementRounds();
   };
 
   useEffect(() => {
     if (currGuess === userNumber) onGameOver();
   }, [currGuess]);
+
+  useEffect(() => {
+    minBoundary = 1;
+    maxBoundary = 100;
+  }, []);
 
   return (
     <View style={styles.gameContainer}>

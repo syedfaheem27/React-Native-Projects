@@ -1,8 +1,9 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 import Title from "../components/ui/Title";
 import Colors from "../constants/Colors";
+import PrimaryButton from "../components/ui/PrimaryButton";
 
-const EndGame = () => {
+const EndGame = ({ userNumber, numRounds, onStartNew }) => {
   return (
     <View style={styles.rootScreen}>
       <Title style={styles.title}>Game Over!!!</Title>
@@ -13,9 +14,12 @@ const EndGame = () => {
         />
       </View>
       <Text style={styles.summary}>
-        You needed <Text style={styles.highlight}>X</Text> tries to guess{" "}
-        <Text style={styles.highlight}>Y</Text>.
+        You needed <Text style={styles.highlight}>{numRounds}</Text> tries to
+        guess <Text style={styles.highlight}>{userNumber}</Text>.
       </Text>
+      <View style={styles.btnContainer}>
+        <PrimaryButton onPress={onStartNew}>Start a new game</PrimaryButton>
+      </View>
     </View>
   );
 };
@@ -53,5 +57,9 @@ const styles = StyleSheet.create({
   },
   highlight: {
     fontFamily: "open-sans-bold",
+  },
+  btnContainer: {
+    marginVertical: 24,
+    width: "50%",
   },
 });

@@ -21,14 +21,22 @@ SplashScreen.setOptions({
 export default function App() {
   const [selectedNum, setSelectedNum] = useState(null);
   const [isGameOver, setIsGameOver] = useState(false);
+  const [numRounds, setNumRounds] = useState(0);
 
   const [loaded] = useFonts({
     "open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
     "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
   });
   const selectNumberHandler = (num) => setSelectedNum(num);
-
   const gameOverHandler = () => setIsGameOver(true);
+
+  const incrementRoundsHandler = () => setNumRounds((r) => r + 1);
+
+  const startNewGameHandler = () => {
+    setSelectedNum(null);
+    setIsGameOver(false);
+    setNumRounds(0);
+  };
 
   let screen = <StartGame onSelectNumber={selectNumberHandler} />;
 
@@ -39,9 +47,22 @@ export default function App() {
   if (!loaded) return null;
 
   if (selectedNum)
-    screen = <Game userNumber={selectedNum} onGameOver={gameOverHandler} />;
+    screen = (
+      <Game
+        userNumber={selectedNum}
+        onGameOver={gameOverHandler}
+        incrementRounds={incrementRoundsHandler}
+      />
+    );
 
-  if (isGameOver) screen = <EndGame />;
+  if (isGameOver)
+    screen = (
+      <EndGame
+        userNumber={selectedNum}
+        numRounds={numRounds}
+        onStartNew={startNewGameHandler}
+      />
+    );
 
   return (
     <>
