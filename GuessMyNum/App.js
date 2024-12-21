@@ -32,16 +32,16 @@ export default function App() {
 
   let screen = <StartGame onSelectNumber={selectNumberHandler} />;
 
+  useEffect(() => {
+    if (loaded) SplashScreen.hide();
+  }, [loaded]);
+
   if (!loaded) return null;
 
   if (selectedNum)
     screen = <Game userNumber={selectedNum} onGameOver={gameOverHandler} />;
 
-  if (isGameOver) return <EndGame />;
-
-  useEffect(() => {
-    if (loaded) SplashScreen.hide();
-  }, [loaded]);
+  if (isGameOver) screen = <EndGame />;
 
   return (
     <>
