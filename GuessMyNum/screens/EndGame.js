@@ -18,7 +18,9 @@ const EndGame = ({ userNumber, numRounds, onStartNew }) => {
         guess <Text style={styles.highlight}>{userNumber}</Text>.
       </Text>
       <View style={styles.btnContainer}>
-        <PrimaryButton onPress={onStartNew}>Start a new game</PrimaryButton>
+        <PrimaryButton onPress={onStartNew.bind(null, 0)}>
+          Start a new game
+        </PrimaryButton>
       </View>
     </View>
   );

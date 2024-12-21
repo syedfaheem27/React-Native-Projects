@@ -28,14 +28,15 @@ export default function App() {
     "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
   });
   const selectNumberHandler = (num) => setSelectedNum(num);
-  const gameOverHandler = () => setIsGameOver(true);
+  const gameOverHandler = (numRounds) => {
+    setIsGameOver(true);
+    setNumRounds(numRounds);
+  };
 
-  const incrementRoundsHandler = () => setNumRounds((r) => r + 1);
-
-  const startNewGameHandler = () => {
+  const startNewGameHandler = (numRounds) => {
     setSelectedNum(null);
     setIsGameOver(false);
-    setNumRounds(0);
+    setNumRounds(numRounds);
   };
 
   let screen = <StartGame onSelectNumber={selectNumberHandler} />;
@@ -47,13 +48,7 @@ export default function App() {
   if (!loaded) return null;
 
   if (selectedNum)
-    screen = (
-      <Game
-        userNumber={selectedNum}
-        onGameOver={gameOverHandler}
-        incrementRounds={incrementRoundsHandler}
-      />
-    );
+    screen = <Game userNumber={selectedNum} onGameOver={gameOverHandler} />;
 
   if (isGameOver)
     screen = (

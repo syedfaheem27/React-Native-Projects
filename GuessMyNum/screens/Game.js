@@ -1,4 +1,4 @@
-import { View, StyleSheet, Alert } from "react-native";
+import { View, StyleSheet, Alert, Text, FlatList } from "react-native";
 import Title from "../components/ui/Title";
 import { useEffect, useMemo, useState } from "react";
 import NumberInput from "../components/game/NumberInput";
@@ -7,6 +7,7 @@ import Colors from "../constants/Colors";
 import InstructionText from "../components/ui/InstructionText";
 import Card from "../components/ui/Card";
 import { Ionicons } from "@expo/vector-icons";
+import GameLog from "../components/game/GameLog";
 
 const generateRandomNumber = (min, max, exclude) => {
   const num = Math.floor(Math.random() * (max - min)) + min;
@@ -18,12 +19,15 @@ const generateRandomNumber = (min, max, exclude) => {
 let minBoundary = 1;
 let maxBoundary = 100;
 
-const Game = ({ userNumber, onGameOver, incrementRounds }) => {
+const Game = ({ userNumber, onGameOver }) => {
   const initialGuess = useMemo(
     () => generateRandomNumber(minBoundary, maxBoundary, userNumber),
     []
   );
   const [currGuess, setCurrGuess] = useState(initialGuess);
+  const [guesses, setGuesses] = useState([initialGuess]);
+
+  const numGuesses = guesses.length;
 
   const nextGuessHandler = (action) => {
     if (
@@ -39,11 +43,11 @@ const Game = ({ userNumber, onGameOver, incrementRounds }) => {
 
     const num = generateRandomNumber(minBoundary, maxBoundary, currGuess);
     setCurrGuess(num);
-    incrementRounds();
+    setGuesses((g) => [num, ...g]);
   };
 
   useEffect(() => {
-    if (currGuess === userNumber) onGameOver();
+    if (currGuess === userNumber) onGameOver(numGuesses);
   }, [currGuess]);
 
   useEffect(() => {
@@ -75,7 +79,18 @@ const Game = ({ userNumber, onGameOver, incrementRounds }) => {
           </View>
         </View>
       </Card>
-      {/* View Logs */}
+      <View style={styles.listContainer}>
+        <FlatList
+          data={guesses}
+          renderItem={(objectData) => (
+            <GameLog
+              guessNumber={numGuesses - objectData.index}
+              guess={objectData.item}
+            />
+          )}
+          keyExtractor={(item) => item}
+        />
+      </View>
     </View>
   );
 };
@@ -107,5 +122,10 @@ const styles = StyleSheet.create({
   },
   card: {
     marginTop: 24,
+  },
+  listContainer: {
+    flex: 1,
+    marginTop: 24,
+    padding: 12,
   },
 });
