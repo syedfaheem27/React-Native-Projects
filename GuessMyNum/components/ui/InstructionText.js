@@ -8,8 +8,8 @@ const InstructionText = ({ children, style }) => {
 const styles = StyleSheet.create({
   instructionText: {
     color: Colors.primary200,
-    fontWeight: "bold",
-    fontSize: 24,
+    fontFamily: "open-sans-bold",
+    fontSize: 22,
     marginTop: 8,
   },
 });
