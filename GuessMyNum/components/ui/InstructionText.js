@@ -11,6 +11,8 @@ const styles = StyleSheet.create({
     fontFamily: "open-sans-bold",
     fontSize: 22,
     marginTop: 8,
+    maxWidth:'80%',
+    marginHorizontal:'auto'
   },
 });
 

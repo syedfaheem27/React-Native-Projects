@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Dimensions } from "react-native";
 
 const NumberInput = ({ children }) => {
   return (
@@ -7,6 +7,8 @@ const NumberInput = ({ children }) => {
     </View>
   );
 };
+
+const deviceWidth = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
   container: {
@@ -19,7 +21,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   text: {
-    fontSize: 36,
+    fontSize: deviceWidth < 380? 18 :32,
     fontWeight: "bold",
     color: "white",
   },
