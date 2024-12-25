@@ -1,4 +1,12 @@
-import { View, StyleSheet, Alert, Text, FlatList } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Alert,
+  Text,
+  FlatList,
+  KeyboardAvoidingView,
+  ScrollView,
+} from "react-native";
 import Title from "../components/ui/Title";
 import { useEffect, useMemo, useState } from "react";
 import NumberInput from "../components/game/NumberInput";
@@ -98,6 +106,9 @@ const Game = ({ userNumber, onGameOver }) => {
 export default Game;
 
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+  },
   gameContainer: {
     padding: 24,
     marginVertical: 24,

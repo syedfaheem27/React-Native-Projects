@@ -4,7 +4,9 @@ import {
   StyleSheet,
   Alert,
   Text,
+  KeyboardAvoidingView,
   useWindowDimensions,
+  ScrollView,
 } from "react-native";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import { useState } from "react";
@@ -36,33 +38,42 @@ const StartGame = ({ onSelectNumber }) => {
   const marginTop = height < 380 ? 36 : 50;
 
   return (
-    <Card style={{ marginTop }}>
-      <InstructionText>Enter a random number</InstructionText>
-      <TextInput
-        style={styles.textInput}
-        maxLength={2}
-        textAlign="center"
-        keyboardType="number-pad"
-        autoCapitalize="none"
-        autoCorrect={false}
-        value={enteredText}
-        onChangeText={inputTextHandler}
-      />
-      <View style={styles.buttonsContainer}>
-        <View style={styles.buttonContainer}>
-          <PrimaryButton onPress={resetTextHandler}>Reset</PrimaryButton>
-        </View>
-        <View style={styles.buttonContainer}>
-          <PrimaryButton onPress={confirmTextHandler}>Confirm</PrimaryButton>
-        </View>
-      </View>
-    </Card>
+    <ScrollView style={styles.screen}>
+      <KeyboardAvoidingView style={styles.screen}>
+        <Card style={{ marginTop }}>
+          <InstructionText>Enter a random number</InstructionText>
+          <TextInput
+            style={styles.textInput}
+            maxLength={2}
+            textAlign="center"
+            keyboardType="number-pad"
+            autoCapitalize="none"
+            autoCorrect={false}
+            value={enteredText}
+            onChangeText={inputTextHandler}
+          />
+          <View style={styles.buttonsContainer}>
+            <View style={styles.buttonContainer}>
+              <PrimaryButton onPress={resetTextHandler}>Reset</PrimaryButton>
+            </View>
+            <View style={styles.buttonContainer}>
+              <PrimaryButton onPress={confirmTextHandler}>
+                Confirm
+              </PrimaryButton>
+            </View>
+          </View>
+        </Card>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 };
 
 export default StartGame;
 
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+  },
   textInput: {
     borderBottomColor: Colors.primary200,
     borderBottomWidth: 2,
