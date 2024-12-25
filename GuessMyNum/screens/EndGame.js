@@ -1,12 +1,22 @@
-import { Dimensions, Image, StyleSheet, Text, View } from "react-native";
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  useWindowDimensions,
+  View,
+} from "react-native";
 import Title from "../components/ui/Title";
 import Colors from "../constants/Colors";
 import PrimaryButton from "../components/ui/PrimaryButton";
 
 const EndGame = ({ userNumber, numRounds, onStartNew }) => {
+  const { width, height } = useWindowDimensions();
+
+  const marginTop = height < 380 ? 20: 36;
   return (
     <View style={styles.rootScreen}>
-      <Title style={styles.title}>Game Over!!!</Title>
+      <Title style={[styles.title,{marginTop}]}>Game Over!!!</Title>
       <View style={styles.imageContainer}>
         <Image
           style={styles.image}

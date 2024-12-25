@@ -1,4 +1,11 @@
-import { TextInput, View, StyleSheet, Alert, Text } from "react-native";
+import {
+  TextInput,
+  View,
+  StyleSheet,
+  Alert,
+  Text,
+  useWindowDimensions,
+} from "react-native";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import { useState } from "react";
 import Colors from "../constants/Colors";
@@ -7,6 +14,7 @@ import Card from "../components/ui/Card";
 
 const StartGame = ({ onSelectNumber }) => {
   const [enteredText, setEnteredText] = useState("");
+  const { height, width } = useWindowDimensions();
 
   const inputTextHandler = (txt) => {
     setEnteredText(txt);
@@ -25,8 +33,10 @@ const StartGame = ({ onSelectNumber }) => {
   };
   const resetTextHandler = () => setEnteredText("");
 
+  const marginTop = height < 380 ? 36 : 50;
+
   return (
-    <Card>
+    <Card style={{ marginTop }}>
       <InstructionText>Enter a random number</InstructionText>
       <TextInput
         style={styles.textInput}
