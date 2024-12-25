@@ -1,6 +1,7 @@
 import {
   Dimensions,
   Image,
+  ScrollView,
   StyleSheet,
   Text,
   useWindowDimensions,
@@ -12,33 +13,48 @@ import PrimaryButton from "../components/ui/PrimaryButton";
 
 const EndGame = ({ userNumber, numRounds, onStartNew }) => {
   const { width, height } = useWindowDimensions();
+  console.log(width,height)
 
-  const marginTop = height < 380 ? 20: 36;
+  const marginTop = height < 380 ? 20 : 36;
+
+  let imageSize = 380;
+
+  if (width < 300) imageSize = 100;
+
+  if (height < 200) imageSize = 100;
+
+  const imageStyle = {
+    width: imageSize,
+    height: imageSize,
+    borderRadius: imageSize / 2,
+  };
   return (
-    <View style={styles.rootScreen}>
-      <Title style={[styles.title,{marginTop}]}>Game Over!!!</Title>
-      <View style={styles.imageContainer}>
-        <Image
-          style={styles.image}
-          source={require("../assets/images/success.png")}
-        />
+    <ScrollView style={{flex:1}}>
+      <View style={styles.rootScreen}>
+        <Title style={[styles.title, { marginTop }]}>Game Over!!!</Title>
+        <View style={[styles.imageContainer, imageStyle]}>
+          <Image
+            style={styles.image}
+            source={require("../assets/images/success.png")}
+          />
+        </View>
+        <Text style={styles.summary}>
+          You needed <Text style={styles.highlight}>{numRounds}</Text> tries to
+          guess <Text style={styles.highlight}>{userNumber}</Text>.
+        </Text>
+        <View style={styles.btnContainer}>
+          <PrimaryButton onPress={onStartNew.bind(null, 0)}>
+            Start a new game
+          </PrimaryButton>
+        </View>
       </View>
-      <Text style={styles.summary}>
-        You needed <Text style={styles.highlight}>{numRounds}</Text> tries to
-        guess <Text style={styles.highlight}>{userNumber}</Text>.
-      </Text>
-      <View style={styles.btnContainer}>
-        <PrimaryButton onPress={onStartNew.bind(null, 0)}>
-          Start a new game
-        </PrimaryButton>
-      </View>
-    </View>
+    </ScrollView>
   );
 };
 
 export default EndGame;
 
-const deviceWidth = Dimensions.get("window").width;
+// const deviceWidth = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
   rootScreen: {
@@ -52,9 +68,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 48,
   },
   imageContainer: {
-    width: deviceWidth < 380 ? 150 : 300,
-    height: deviceWidth < 380 ? 150 : 300,
-    borderRadius: deviceWidth < 380 ? 75 : 150,
+    // width: deviceWidth < 380 ? 150 : 300,
+    // height: deviceWidth < 380 ? 150 : 300,
+    // borderRadius: deviceWidth < 380 ? 75 : 150,
     borderWidth: 4,
     borderColor: Colors.primary950,
     overflow: "hidden",

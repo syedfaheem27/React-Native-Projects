@@ -39,7 +39,7 @@ const StartGame = ({ onSelectNumber }) => {
 
   return (
     <ScrollView style={styles.screen}>
-      <KeyboardAvoidingView style={styles.screen}>
+      <KeyboardAvoidingView style={styles.screen} behavior="position">
         <Card style={{ marginTop }}>
           <InstructionText>Enter a random number</InstructionText>
           <TextInput
