@@ -1,6 +1,6 @@
 import { Pressable, Text, View, StyleSheet, Platform } from "react-native";
 
-const CategoryTile = ({ title, color }) => {
+const CategoryTile = ({ title, color, onPress }) => {
   return (
     <View style={[styles.outerContainer, { backgroundColor: color }]}>
       <Pressable
@@ -8,6 +8,7 @@ const CategoryTile = ({ title, color }) => {
           pressed ? [styles.button, styles.button_pressed_ios] : styles.button
         }
         android_ripple={{ color: "#ccc" }}
+        onPress={onPress}
       >
         <View style={[styles.innerContainer]}>
           <Text style={styles.title}>{title}</Text>
