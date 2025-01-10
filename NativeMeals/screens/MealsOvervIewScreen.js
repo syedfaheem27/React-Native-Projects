@@ -2,6 +2,7 @@ import { useRoute } from "@react-navigation/native";
 import { FlatList, StyleSheet, Text, View } from "react-native";
 
 import { MEALS } from "../data/Categories";
+import MealItem from "../components/MealItem";
 
 // const MealsOverviewScreen = ({ route }) => {
 
@@ -10,14 +11,18 @@ const MealsOverviewScreen = () => {
   const { categoryId } = route.params;
 
   const selectedMeals = MEALS.filter((meal) => {
-    return meal.categoryIds.includes(categoryId) >= 0;
+    return meal.categoryIds.includes(categoryId);
   });
   const renderMealItem = (itemObj) => {
-    return (
-      <View>
-        <Text>{itemObj.item.title}</Text>
-      </View>
-    );
+    const item = itemObj.item;
+    const props = {
+      title: item.title,
+      affordability: item.affordability,
+      complexity: item.complexity,
+      imageUrl: item.imageUrl,
+      duration: item.duration,
+    };
+    return <MealItem {...props} />;
   };
 
   return (
